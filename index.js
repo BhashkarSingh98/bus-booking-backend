@@ -13,7 +13,7 @@ dotenv.config()
 mongoose.connect(process.env.MONGO_URL)
 .then(()=>console.log("dbconnection seccessful!"))
 .catch((err)=>console.log(err));
-var admin=0;
+
 
 app.use(express.json());
 
@@ -32,22 +32,15 @@ app.post("/register", async (req, res) => {
 });
 
 app.post("/login", async (req, res) => {
-  console.log("user");
   console.log(req.body);
   if (req.body.password && req.body.email) {
-    console.log(req.body.password);
-    
     let user = await User.findOne(req.body).select("-password");
     if (user) {
-      admin=0;
       jwt.sign({ user }, jwtkey, { expiresIn: "2h" }, (err, token) => {
         if (err) {
           res.send({ result: "something went wrong " });
         }
-        if(req.body.password=="admin"&&req.body.email=="admin@123.com"){
-          admin=1;
-        }
-        res.send({ user, auth: token ,admin});
+        res.send({ user, auth: token });
       });
     } else {
       res.send({ result: "no user found" });

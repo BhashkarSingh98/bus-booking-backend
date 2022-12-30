@@ -92,6 +92,24 @@ app.put("/passenger/:id", async (req, res) => {
 
   res.send(result);
 });
+app.put("/admin/:id", async (req, res) => {
+  console.log("bhashkar");
+  let result = await Passengers.updateOne(
+    { _id: req.params.id },
+    {
+      $set: req.body,
+     
+         color:"",
+          visibility:"",
+          display:"",
+          booked:false
+    
+    }
+  );
+
+  res.send(result);
+});
+
 
 
 

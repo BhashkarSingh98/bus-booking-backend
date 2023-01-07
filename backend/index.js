@@ -1,4 +1,5 @@
 const express = require("express");
+const app = express();
 const cors = require("cors");
 app.use(cors());
 const mongoose=require("mongoose")
@@ -12,7 +13,6 @@ const jwt = require("jsonwebtoken");
 const jwtkey = "rubixe";
 dotenv.config()
 
-const app = express();
 app.use(express.json());
 
 
@@ -101,7 +101,7 @@ app.get("/search/:key", async (req, res) => {
   res.send(result);
 });
 
-app.listen(5000, () => {
+app.listen(5050, () => {
   console.log("server started");
 });
 

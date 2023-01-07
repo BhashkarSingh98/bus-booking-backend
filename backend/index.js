@@ -1,14 +1,24 @@
 const express = require("express");
+const cors = require("cors");
+app.use(cors());
+const mongoose=require("mongoose")
+const dotenv=require("dotenv");
+
 const User = require("./db/User");
 const Product = require("./db/Product");
-require("./db/config");
-const cors = require("cors");
+
+
 const jwt = require("jsonwebtoken");
-const jwtkey = "e-comm";
+const jwtkey = "rubixe";
+dotenv.config()
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+
+
+mongoose.connect(process.env.MONGO_URL)
+.then(()=>console.log("dbconnection seccessful!"))
+.catch((err)=>console.log(err));
 
 app.post("/register", async (req, res) => {
   let user = new User(req.body);

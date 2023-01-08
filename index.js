@@ -11,7 +11,7 @@ const jwtkey = "e-comm";
 dotenv.config()
 let admin=0;
 
-mongoose.connect(process.env.MONGO_URL2)
+mongoose.connect(process.env.MONGO_URL)
 .then(()=>console.log("dbconnection seccessful!"))
 .catch((err)=>console.log(err));
 
